@@ -1,0 +1,11 @@
+{
+  "model_type": "XGBoost",
+  "training_data": "Original (no SMOTE)",
+  "imbalance_handling": "scale_pos_weight",
+  "auc_roc": 0.9817,
+  "f1_score": 0.8454,
+  "threshold": 0.5,
+  "n_features": 32,
+  "version": "1.0.0",
+  "created": "2026-04-28"
+}

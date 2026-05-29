@@ -1,0 +1,6 @@
+{
+  "final_threshold": 0.5,
+  "best_f1_threshold": 0.5,
+  "high_precision_threshold": 0.98,
+  "note": "Using 0.5 for high recall \u2014 catching more fraud is priority"
+}
