@@ -10,6 +10,7 @@ shap
 fastapi
 uvicorn
 streamlit
+plotly
 requests
 jupyter
 python-multipart
