@@ -269,8 +269,8 @@ with tab1:
             # Directly set all values in session state
 
             for key, val in SAMPLE_LEGIT.items():
-            st.session_state[f'input_{key}'] = float(val)
-        st.rerun()
+                st.session_state[f'input_{key}'] = float(val)
+            st.rerun()
 
     with col_btn2:
         if st.button("🚨 Load Sample Fraud",
