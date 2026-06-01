@@ -259,39 +259,6 @@ tab1, tab2, tab3 = st.tabs([
 with tab1:
     st.subheader("Transaction Details")
 
-    # Use sample transactions
-    col_btn1, col_btn2, col_btn3 = st.columns(3)
-
-    with col_btn1:
-        if st.button("📋 Load Sample Legit",
-                     use_container_width=True):
-            st.session_state['sample'] = 'legit'
-            # Directly set all values in session state
-
-            for key, val in SAMPLE_LEGIT.items():
-                st.session_state[f'input_{key}'] = float(val)
-            st.rerun()
-
-    with col_btn2:
-        if st.button("🚨 Load Sample Fraud",
-                     use_container_width=True):
-            st.session_state['sample'] = 'fraud'
-            # Directly set all values in session state
-            for key, val in SAMPLE_FRAUD.items():
-                st.session_state[f'input_{key}'] = float(val)
-            st.rerun()
-
-    with col_btn3:
-        if st.button("🗑️ Clear Form",
-                     use_container_width=True):
-            st.session_state['sample'] = 'clear'
-            # Clear all values
-            for key in SAMPLE_LEGIT.keys():
-                st.session_state[f'input_{key}'] = 0.0
-            st.rerun()
-
-    st.markdown("---")
-
     # Sample data
     SAMPLE_LEGIT = {
         "Time": 50000.0, "Amount": 50.0,
@@ -329,6 +296,41 @@ with tab1:
         "V27": 0.2432, "V28": 0.0977
     }
 
+
+    # Use sample transactions
+    col_btn1, col_btn2, col_btn3 = st.columns(3)
+
+    with col_btn1:
+        if st.button("📋 Load Sample Legit",
+                     use_container_width=True):
+            st.session_state['sample'] = 'legit'
+            # Directly set all values in session state
+
+            for key, val in SAMPLE_LEGIT.items():
+                st.session_state[f'input_{key}'] = float(val)
+            st.rerun()
+
+    with col_btn2:
+        if st.button("🚨 Load Sample Fraud",
+                     use_container_width=True):
+            st.session_state['sample'] = 'fraud'
+            # Directly set all values in session state
+            for key, val in SAMPLE_FRAUD.items():
+                st.session_state[f'input_{key}'] = float(val)
+            st.rerun()
+
+    with col_btn3:
+        if st.button("🗑️ Clear Form",
+                     use_container_width=True):
+            st.session_state['sample'] = 'clear'
+            # Clear all values
+            for key in SAMPLE_LEGIT.keys():
+                st.session_state[f'input_{key}'] = 0.0
+            st.rerun()
+
+    st.markdown("---")
+
+    
     # Determine default values
     defaults = {}
     for key in SAMPLE_LEGIT.keys():
