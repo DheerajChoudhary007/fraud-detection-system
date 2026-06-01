@@ -57,7 +57,7 @@ st.markdown("""
 # ─────────────────────────────────────
 
 # Change this to your Render URL
-API_URL = "https://fraud-detection-api-h8g9.onrender.com"
+API_URL = "https://fraud-detection-api-h8g9.onrender.com"  
 
 # ─────────────────────────────────────
 # HELPER FUNCTIONS
@@ -266,16 +266,29 @@ with tab1:
         if st.button("📋 Load Sample Legit",
                      use_container_width=True):
             st.session_state['sample'] = 'legit'
+            # Directly set all values in session state
+
+            for key, val in SAMPLE_LEGIT.items():
+            st.session_state[f'input_{key}'] = float(val)
+        st.rerun()
 
     with col_btn2:
         if st.button("🚨 Load Sample Fraud",
                      use_container_width=True):
             st.session_state['sample'] = 'fraud'
+            # Directly set all values in session state
+            for key, val in SAMPLE_FRAUD.items():
+                st.session_state[f'input_{key}'] = float(val)
+            st.rerun()
 
     with col_btn3:
         if st.button("🗑️ Clear Form",
                      use_container_width=True):
             st.session_state['sample'] = 'clear'
+            # Clear all values
+            for key in SAMPLE_LEGIT.keys():
+                st.session_state[f'input_{key}'] = 0.0
+            st.rerun()
 
     st.markdown("---")
 
@@ -317,10 +330,11 @@ with tab1:
     }
 
     # Determine default values
-    sample = st.session_state.get('sample', None)
-    defaults = SAMPLE_LEGIT if sample == 'legit' \
-        else SAMPLE_FRAUD if sample == 'fraud' \
-        else {k: 0.0 for k in SAMPLE_LEGIT}
+    defaults = {}
+    for key in SAMPLE_LEGIT.keys():
+        defaults[key] = st.session_state.get(
+            f'input_{key}', 0.0
+        )
 
     # Input form
     col1, col2 = st.columns(2)
@@ -330,13 +344,15 @@ with tab1:
         time_val = st.number_input(
             "Time (seconds)",
             value=float(defaults.get('Time', 0.0)),
-            help="Seconds elapsed since first transaction"
+            help="Seconds elapsed since first transaction",
+            key="display_time"
         )
         amount_val = st.number_input(
             "Amount (€)",
             value=float(defaults.get('Amount', 0.0)),
             min_value=0.0,
-            help="Transaction amount"
+            help="Transaction amount",
+            key="display_amount"
         )
 
     with col2:
@@ -371,7 +387,7 @@ with tab1:
                     defaults.get(f'V{i}', 0.0)
                 ),
                 format="%.4f",
-                key=f"v{i}"
+                key=f"display_v{i}"
             )
 
     st.markdown("---")
